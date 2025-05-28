@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي يوماً بيوم - العدد #01</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .magazine {
+            width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .issue-info {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #4facfe;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(79, 172, 254, 0.05), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tool-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .tool-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #4facfe;
+            font-weight: bold;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background: white;
+        }
+        
+        .comparison-table tr:nth-child(even) td {
+            background: #f8f9ff;
+        }
+        
+        .quote {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 20px;
+            border-radius: 15px;
+            font-style: italic;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            font-size: 4em;
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            color: rgba(255,255,255,0.5);
+            font-family: serif;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .productivity-tip {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .next-issue {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+        
+        .highlight-text {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine">
+        <div class="header">
+            <h1><span class="emoji">🧠✨</span> الذكاء الاصطناعي يوماً بيوم</h1>
+            <p class="subtitle">دليلك الذكي نحو مستقبل أكثر إنتاجية</p>
+            <div class="issue-info">العدد #01 | 28 مايو 2025</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🔍</span> أداة اليوم المميزة</h2>
+                <div class="tool-highlight">
+                    <div class="tool-name"><span class="emoji">🎯</span> Perplexity AI — عبقري البحث الفوري</div>
+                    <p>تخيل نسخة مطورة من Google، لكنها أذكى وأكثر دقة.</p>
+                    
+                    <h4><span class="emoji">📌</span> لماذا تستحق التجربة؟</h4>
+                    <ul class="features">
+                        <li>تلخيص فوري لأي موضوع باستخدام مصادر موثوقة</li>
+                        <li>عرض الأبحاث الأكاديمية الحديثة</li>
+                        <li>مناسبة جدًا للمعلمين، والكتّاب، والمسوّقين</li>
+                    </ul>
+                </div>
+                <a href="https://www.perplexity.ai" class="link-button">🔗 جرّبها الآن</a>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🎥</span> ثورة "النص إلى فيديو"</h2>
+                <h3><span class="emoji">🎬</span> Veo 3 (Google) vs. Pika 1.0 vs. Runway ML</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>المنصة</th>
+                            <th>القوة</th>
+                            <th>الأفضل لـ</th>
+                            <th>الرابط</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Veo 3</strong></td>
+                            <td>مشاهد سينمائية واقعية</td>
+                            <td>الإعلانات، القصص، التريلرات</td>
+                            <td><a href="https://labs.google/veo" class="link-button">زيارة</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pika 1.0</strong></td>
+                            <td>تغيير الأسلوب أثناء الفيديو</td>
+                            <td>محتوى قصير، أنيميشن</td>
+                            <td><a href="https://www.pika.art" class="link-button">زيارة</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Runway ML</strong></td>
+                            <td>تعديل الحركة بالفرشاة</td>
+                            <td>الشروحات والفيديوهات التعليمية</td>
+                            <td><a href="https://runwayml.com" class="link-button">زيارة</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">✍️</span> الكتابة.. لكن بمفعول سحري</h2>
+                <div class="tool-highlight">
+                    <div class="tool-name"><span class="emoji">🪄</span> Wordtune Spices</div>
+                    <ul class="features">
+                        <li>يضيف اقتباسات، أمثلة، وإحصائيات فورية</li>
+                        <li>يحوّل أي نص ممل إلى محتوى مشوق</li>
+                        <li>مثالي للمدوّنين، والمعلمين، والباحثين</li>
+                    </ul>
+                </div>
+                <a href="https://www.wordtune.com/spices" class="link-button">🔗 استكشفه هنا</a>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🧠</span> ذاكرة لا تُنسى</h2>
+                <div class="tool-highlight">
+                    <div class="tool-name"><span class="emoji">💻</span> Rewind AI – لمستخدمي Mac فقط</div>
+                    <p>تخيل أداة تسجل كل شيء تراه، أو تقوله، أو تسمعه… وتتيح لك البحث فيه لاحقًا وكأنه Google لذاكرتك!</p>
+                    
+                    <h4><span class="emoji">💼</span> استخدمه في:</h4>
+                    <ul class="features">
+                        <li>استرجاع اجتماعات Zoom</li>
+                        <li>تذكر المقالات والروابط القديمة</li>
+                        <li>تتبع إنتاجيتك اليومية</li>
+                    </ul>
+                </div>
+                <a href="https://www.rewind.ai" class="link-button">🔗 اكتشفه الآن</a>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🔮</span> حيلة اليوم الإنتاجية</h2>
+                <div class="productivity-tip">
+                    <h3><span class="highlight-text">دمج ChatGPT + Claude + N8n</span></h3>
+                    <p>اجعل الذكاء الاصطناعي ينفّذ لك أبحاثك، يلخص مستنداتك، ويُفعّل مهامك تلقائيًا!</p>
+                    <p><span class="emoji">🧩</span> <em>Claude 3.5 الآن متفوق في التفكير المجرد، وN8n يجعل كل هذا بدون كود.</em></p>
+                    
+                    <div style="margin-top: 20px;">
+                        <a href="https://chat.openai.com" class="link-button">🔗 ChatGPT</a>
+                        <a href="https://claude.ai" class="link-button">🔗 Claude (Anthropic)</a>
+                        <a href="https://n8n.io" class="link-button">🔗 N8n</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="next-issue">
+                <h3><span class="emoji">🗞️</span> في العدد القادم:</h3>
+                <p>أفضل أدوات الذكاء الاصطناعي لإنشاء المحتوى باللغة العربية، والترجمة، والتعليق الصوتي.</p>
+                <p style="margin-top: 15px; font-weight: 700; font-size: 1.1em;">ابقَ متقدمًا... وانتج أكثر، بذكاء!</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            مع تحياتي، <strong>Mr. Islam Saber</strong>
+        </div>
+    </div>
+</body>
+</html>
